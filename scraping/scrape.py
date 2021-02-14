@@ -68,6 +68,7 @@ def scrape_from_song_path(song_path, file_name):
         text = result.text.replace('\u2005', ' ')
         text = text.replace('\u205f', ' ')
         file.write(text)
+        file.write('\n')
         print(repr(text))
 
     for result in results:
@@ -76,7 +77,7 @@ def scrape_from_song_path(song_path, file_name):
         text = text.replace('\u205f', ' ')
         file.write(text)
         print(repr(text))
-
+    file.write('\n')
     file.close()
 
 client_id = "omA-SiO8cgdsN213wKZHtEX68I616aDwCuLxHtc19iVk5_S2CVzQhRGcJDLcn8bD"
@@ -86,7 +87,7 @@ client_token = 'yzewkvDtjcS5FvLvrfUopskWKQk-miBMSZklLIs6cYbVLeIN03IShcX6bVb8cEeW
 token = 'Bearer {}'.format(client_token)
 headers = {'Authorization' : token}
 
-scrape_from_artist('355608', 'test.txt')
+scrape_from_artist('72', 'KanyeWest.txt')
 
 
 
