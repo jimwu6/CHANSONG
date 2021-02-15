@@ -87,7 +87,7 @@ client_token = 'yzewkvDtjcS5FvLvrfUopskWKQk-miBMSZklLIs6cYbVLeIN03IShcX6bVb8cEeW
 token = 'Bearer {}'.format(client_token)
 headers = {'Authorization' : token}
 
-scrape_from_artist('355608', 'EDEN.txt')
+scrape_from_artist('586', 'Beatles.txt')
 
 
 
