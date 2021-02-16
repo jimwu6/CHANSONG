@@ -87,7 +87,7 @@ client_token = 'yzewkvDtjcS5FvLvrfUopskWKQk-miBMSZklLIs6cYbVLeIN03IShcX6bVb8cEeW
 token = 'Bearer {}'.format(client_token)
 headers = {'Authorization' : token}
 
-scrape_from_artist('26507', 'ArianaGrande.txt')
+scrape_from_artist('12418', 'EdSheeran.txt')
 
 
 
