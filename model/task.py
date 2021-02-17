@@ -1,25 +1,20 @@
 import argparse
-
 from . import models
-
-import numpy as np
 import os
-import time
-
 import tensorflow as tf
 from tensorflow import keras
+import numpy as np
 
-from tensorflow.keras import layers
 from tensorflow.keras.layers.experimental import preprocessing
 
-def get_args():
 
+def get_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
         '--job-dir',
         type=str,
-        required=False, # CHANGE THIS TO TRUE WHEN USING
+        required=False,  # CHANGE THIS TO TRUE WHEN USING
         help='local or GCS location for writing checkpoints and exporting models'
     )
 
@@ -75,24 +70,31 @@ def get_args():
     args, _ = parser.parse_known_args()
     return args
 
+
 def train_and_eval(args):
     SEQ_LENGTH = args.seq_len
     BATCH_SIZE = args.batch_size
-    BUFFER_SIZE = args.buffer_size
+    BUFFER_SIZE = 10000
 
     EMBEDDING_DIM = args.embedding_dim
     RNN_UNITS = args.rnn_units
 
-    EPOCHS = args.epochs
+    EPOCHS = args.num_epochs
 
     # get the data file
+
     if args.dataset_num == 1:
-        dataset_file = args.job_dir + '/DS_1.txt'
+        # dataset_file = args.job_dir + '/DS_1.txt'
+        # dataset_file = 'https://console.cloud.google.com/storage/browser/rnn-genius-bucket-model16/DS_1.txt'
+        dataset_file = tf.keras.utils.get_file('DS_1.txt',
+                                               'https://storage.googleapis.com/rnn-genius-bucket-model16/DS_1.txt')
     else:
-        dataset_file = args.job_dir + '/DS_2.txt'
+        # dataset_file = args.job_dir + '/DS_2.txt'
+        dataset_file = tf.keras.utils.get_file('DS_2.txt',
+                                               'https://storage.googleapis.com/rnn-genius-bucket-model16/DS_2.txt')
 
     text = open(dataset_file, 'rb').read().decode(encoding='utf-8')
-
+    print(dataset_file)
     print('Length of text: {} characters'.format(len(text)))
 
     vocab = sorted(set(text))
@@ -121,9 +123,9 @@ def train_and_eval(args):
 
     dataset = (
         dataset
-            .shuffle(BUFFER_SIZE)
-            .batch(BATCH_SIZE, drop_remainder=True)
-            .prefetch(tf.data.experimental.AUTOTUNE))
+        .shuffle(BUFFER_SIZE)
+        .batch(BATCH_SIZE, drop_remainder=True)
+        .prefetch(tf.data.experimental.AUTOTUNE))
 
     model = models.get_model(args.model_num,
                              vocab_size=len(ids_from_chars.get_vocabulary()),
@@ -140,7 +142,18 @@ def train_and_eval(args):
         verbose=1
     )  # save_freq for how many checkpoints (every 5 epochs)
 
+    
+    print("Fitting")
     history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback])
+    print(model.summary())
+    loss_file = 'loss.txt'
+    losses = history.history['loss']
+    numpy_losses = np.array(losses)
+    np.savetxt(loss_file, X=numpy_losses, delimiter=',')
+
+    print('Completed')
+
 
 if __name__ == '__main__':
     args = get_args()
+    train_and_eval(args)

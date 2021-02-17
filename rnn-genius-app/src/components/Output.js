@@ -1,8 +1,6 @@
 import React from 'react'
 
-const Output = text => {
-
-
+const Output = ({text}) => {
 
 
     return (
@@ -11,4 +9,7 @@ const Output = text => {
         </div>
     )
 
+
 }
+
+export default Output;

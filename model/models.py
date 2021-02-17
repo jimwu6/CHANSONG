@@ -1,12 +1,5 @@
-import numpy as np
-import os
-import time
-
 import tensorflow as tf
 from tensorflow import keras
-
-from tensorflow.keras import layers
-from tensorflow.keras.layers.experimental import preprocessing
 
 class ModelOne(keras.Model):
     def __init__(self, vocab_size, embedding_dim, rnn_units):
@@ -23,7 +16,7 @@ class ModelOne(keras.Model):
         x = self.embedding(x, training=training)
         if states is None:
             states = self.gru.get_initial_state(x)
-        x, states = self.lstm(x, initial_state=states, training=training)
+        x, states = self.gru(x, initial_state=states, training=training)
         x = self.dense(x, training=training)
 
         if return_state:
@@ -67,15 +60,12 @@ class ModelThree(keras.Model):
         self.lstm = tf.keras.layers.LSTM(rnn_units,
                                          return_sequences=True,
                                          return_state=True,
-                                         # stateful=True
                                          )
         self.dense = tf.keras.layers.Dense(vocab_size)
 
     def call(self, inputs, states=None, return_state=False, training=False):
         x = inputs
         x = self.embedding(x, training=training)
-        # if states is None:
-        #     states = [tf.zeros([64,768]), tf.zeros([64, 768])]
         x, h, c = self.lstm(x, initial_state=states, training=training)
         states = [h, c]
         x = self.dense(x, training=training)
@@ -85,17 +75,49 @@ class ModelThree(keras.Model):
         else:
             return x
 
+
+class ModelFour(keras.Model):
+    def __init__(self, vocab_size, embedding_dim, rnn_units):
+        super().__init__(self)
+        self.embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim)
+        self.lstm_one = tf.keras.layers.LSTM(rnn_units,
+                                             return_sequences=True,
+                                             return_state=True,
+                                             )
+        self.lstm_two = tf.keras.layers.LSTM(rnn_units,
+                                             return_sequences=True,
+                                             return_state=True,
+                                             )
+        self.dense = tf.keras.layers.Dense(vocab_size)
+
+    def call(self, inputs, states=None, return_state=False, training=False):
+        x = inputs
+        x = self.embedding(x, training=training)
+        if states is None:
+            states = [None, None]
+        x, h, c = self.lstm_one(x, initial_state=states[0], training=training)
+        states[0] = [h, c]
+        x, h, c = self.lstm_two(x, initial_state=states[1], training=training)
+        states[1] = [h, c]
+        x = self.dense(x, training=training)
+
+        if return_state:
+            return x, states
+        else:
+            return x
+
+
 def get_model(model_num, vocab_size, embedding_dim, rnn_units):
     loss = tf.losses.SparseCategoricalCrossentropy(from_logits=True)
 
     if model_num == 1:
         model = ModelOne(vocab_size, embedding_dim, rnn_units)
     elif model_num == 2:
-        model = ModelOne(vocab_size, embedding_dim, rnn_units)
+        model = ModelTwo(vocab_size, embedding_dim, rnn_units)
     elif model_num == 3:
-        model = ModelOne(vocab_size, embedding_dim, rnn_units)
+        model = ModelThree(vocab_size, embedding_dim, rnn_units)
     else:
-        model = ModelOne(vocab_size, embedding_dim, rnn_units)
+        model = ModelFour(vocab_size, embedding_dim, rnn_units)
 
     model.compile(optimizer='adam', loss=loss)
 
