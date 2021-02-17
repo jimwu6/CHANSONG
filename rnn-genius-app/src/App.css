@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+
+  display: flex;
+}
+
+
+.output-div {
+
+  flex: 1;
+}
+
+.inputs-div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-button {
+  width: 30%;
+}
