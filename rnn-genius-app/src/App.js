@@ -3,8 +3,6 @@ import axios from 'axios'
 
 import './App.css';
 
-import Output from './components/Output'
-
 const App = () => {
 
   const [outputText, setOutputText] = useState("Output text will go here.")
@@ -38,9 +36,11 @@ const App = () => {
       length: len,
       temperature: temp
     }
+    setOutputText("Waiting...")
     console.log("Submitting " + addr)
     axios.get('localhost:5000/', {params})
       .then(res => setOutputText(res.data))
+      .catch(res => setOutputText("an error occured, please try again"))
 
   }
 
@@ -69,9 +69,11 @@ const App = () => {
       </div>
 
 
-      <div className="output-div">
-        <Output text={outputText}></Output>
+    <div className="output-div">
+      <div>
+        {outputText}
       </div>
+    </div>
       
     </div>
   );
