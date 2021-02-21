@@ -1,12 +1,12 @@
 <h1 align="center">
   <br>
-  PROJECT NAME
+  CHANSONG
   <br>
 </h1>
 
 <p align="center">
   <a href="#background">Background</a> •
-  <a href="#features">Features</a> •
+  <a href="#features">Web App Usage</a> •
   <a href="#acknowledgements">Acknowledgements</a> •
   <a href="#authors">Authors</a> •
   <a href="#license">License</a>
@@ -24,12 +24,12 @@ There is a small (functional) React app with a Flask backend, which will be move
 ![example lyrics](example1.jpg)
 
 ## Acknowledgements
-**PROJECT NAME** was built with:
+CHANSONG was built with:
 * [TensorFlow 2.0](https://www.tensorflow.org/guide/keras/rnn)
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 * [React](https://reactjs.org/)
 
-**PROJECT NAME** is inspired by Andrej Karpathy's [blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) on the effectiveness of recurrent neural networks.
+CHANSONG is inspired by Andrej Karpathy's [blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) on the effectiveness of recurrent neural networks.
 
 Models were trained on a lyrics dataset scraped using the [Genius API](https://docs.genius.com/), and the (mostly) cleaned files are found [here](https://github.com/jimwu6/rnn-genius/tree/master/scraping). Some files may have non-lyric portions because Genius has text from media other than songs (e.g. interviews, concert lists). All the files have at most 84 unique characters to keep consistent while training on different datasets. 
 
