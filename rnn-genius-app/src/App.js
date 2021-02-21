@@ -12,12 +12,13 @@ const App = () => {
   const [addrtype, setAddrtype] = useState([
     ["model_17_base", "Embedded → GRU (1024) → Dense, SEQ_LEN = 200"],
     ["model_15_base", "Embedded → LSTM (1024) → Dense, SEQ_LEN = 200"],
-    ["model_19_base", "Embedded → GRU (768) → GRU (768) → Dense, SEQ_LEN = 200"],
+    ["model_18_base", "Embedded → GRU (768) → GRU (768) → Dense, SEQ_LEN = 200"],
     ["model_19_base", "Embedded → GRU (768) → GRU (768) → Dense, SEQ_LEN = 300"],
     ["model_20_base", "Embedded → LSTM (768) → LSTM (768) → Dense, SEQ_LEN = 200"],
     ["model_21_base", "Embedded → LSTM (768) → LSTM (768) → Dense, SEQ_LEN = 300"]
     ])
   const [addr, setAddr] = useState(addrtype[0][0])
+  const [timeUsed, setTimeUsed] = useState(0)
 
   const Add = addrtype.map(Add => Add)
   const handleAddrTypeChange = (e) => {
@@ -30,6 +31,8 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    let start_time = new Date()
+
     let params =  {
       model_name: addr, 
       input_text: inputText,
@@ -38,10 +41,10 @@ const App = () => {
     }
     setOutputText("Waiting...")
     console.log("Submitting " + addr)
-    axios.get('localhost:5000/', {params})
-      .then(res => setOutputText(res.data))
+    axios.get('http://localhost:5000/', {params})
+     .then(res => setOutputText(res.data))
       .catch(res => setOutputText("an error occured, please try again"))
-
+      .then(res => setTimeUsed((new Date() - start_time) / 1000))
   }
 
   return (
@@ -72,6 +75,11 @@ const App = () => {
     <div className="output-div">
       <div>
         {outputText}
+      </div>
+      <br/>
+      <bn/>
+      <div>
+        Time taken: {timeUsed}
       </div>
     </div>
       

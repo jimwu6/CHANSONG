@@ -6,14 +6,19 @@
 
 
 .output-div {
-
+  white-space: pre;
+  text-align: left;
   flex: 1;
 }
 
 .inputs-div {
-  width: 50%;
+  width: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10%;
 }
 
 .submit-button {

@@ -43,7 +43,10 @@ def generate_lyrics(model_name, temp, length, input_text):
     model = models.get_model(arch_num, len(ids_from_chars.get_vocabulary()), 256, rnn_units)
 
     checkpoint_dir = './models/model'+num
-    checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt_30")
+    finetune_add = ""
+    if finetune != "base":
+        finetune_add = "_"+finetune
+    checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt_30" + finetune_add)
     model.load_weights(checkpoint_prefix)
     one_step_model = models.OneStep(model, chars_from_ids, ids_from_chars, temp)
 
