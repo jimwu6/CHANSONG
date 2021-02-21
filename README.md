@@ -13,7 +13,7 @@
 </p>
 
 ## Background
-Recurrent Neural Networks are a common tool used in NLP tasks nowadays. We trained 20+ models using Tensorflow to generate lyrics. Models were trained on either 4 or 19 artists, with different configurations in architectures (various combinations of LSTMs and GRUs), sequence length, and RNN units to explore the effect of these choices on dataset. Original lyric data is in the folder `scraping`, named `DS_1.txt` and `DS_2.txt` for the small and big datasets respectively. Note that the big dataset is only 20MB and so is still relatively low. In the future, a larger dataset (at least 100MB) may be scraped and tested. A more in depth write-up about the details and results of the project will be written in the near future. 
+Recurrent Neural Networks are a common tool used in NLP tasks nowadays. We trained 20+ models on Google Cloud Platform and Google Colab using Tensorflow to generate lyrics. Models were trained on either 4 or 19 artists, with different configurations in architectures (various combinations of LSTMs and GRUs), sequence length, and RNN units to explore the effect of these choices on dataset. Original lyric data is in the folder `scraping`, named `DS_1.txt` and `DS_2.txt` for the small and big datasets respectively. Note that the big dataset is only 20MB and so is still relatively low. In the future, a larger dataset (at least 100MB) may be scraped and tested. A more in depth write-up about the details and results of the project will be written in the near future. 
 
 
 ## Web App Usage
