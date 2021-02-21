@@ -1,5 +1,16 @@
-# PROJECT NAME
-> A song generator that sometimes says the same thing twice.
+<h1 align="center">
+  <br>
+  PROJECT NAME
+  <br>
+</h1>
+
+<p align="center">
+  <a href="#background">Background</a> •
+  <a href="#features">Features</a> •
+  <a href="#acknowledgements">Acknowledgements</a> •
+  <a href="#authors">Authors</a> •
+  <a href="#license">License</a>
+</p>
 
 Yep
 
@@ -16,6 +27,9 @@ Site screenshots/description of parameters?
 * [React](https://reactjs.org/)
 
 Models were trained on a lyrics dataset scraped using the [Genius API](https://docs.genius.com/).
+
+## Authors
+Made by [Jim](https://github.com/jimwu6) and [Ryan](https://github.com/ryli123). We don't know what's going on.
 
 **PROJECT NAME** is inspired by Andrej Karpathy's [blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/?fbclid=IwAR2jDIjSieoc9ZtG_7FLN03Q3LZcUUtkw7V_4mnW0pNrelXoi6PAQsO2ffQ) on the effectiveness of recurrent neural networks.
 
