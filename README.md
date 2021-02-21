@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="#background">Background</a> •
-  <a href="#Web%20App%20Usage">Web App Usage</a> •
+  <a href="#web-app-usage">Web App Usage</a> •
   <a href="#acknowledgements">Acknowledgements</a> •
   <a href="#authors">Authors</a> •
   <a href="#license">License</a>
