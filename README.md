@@ -39,5 +39,5 @@ Made by [Jim](https://github.com/jimwu6) and [Ryan](https://github.com/ryli123).
 
 
 ## License
-This project is under an [MIT license](https://github.com/jimwu6/rnn-genius/blob/master/LICENSE.md).
+This project is under an [MIT license](https://github.com/jimwu6/CHANSONG/blob/master/LICENSE.md).
 
