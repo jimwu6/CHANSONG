@@ -13,10 +13,7 @@
 </p>
 
 ## Background
-Recurrent Neural Networks are a ubiquitous tool used in NLP tasks. 
-
-## Features
-Site screenshots/description of parameters?
+Recurrent Neural Networks are a common tool used in NLP tasks nowadays. We trained 20+ models, some with 8 million parameters, to generate lyrics. Models were trained on either 4 or 19 artists, with different configurations in architectures (various combinations of LSTMs and GRUs), sequence length, and RNN units to explore the effect of these choices on dataset. Original lyric data is in the folder `scraping`, named `DS_1.txt` and `DS_2.txt` for the small and big datasets respectively. Note that the big dataset is only 20MB and so is still relatively low. In the future, a larger dataset (at least 100MB) may be scraped and tested.
 
 ## Web App Usage
 There is a small (functional) React app with a Flask backend, which will be moved to an actual site in the near future. To run the frontend, found in the folder rnn-genius-app, instlall the necessary packages using `npm install` and run `npm start`. To run the backend, found in the folder backend, set the `FLASK_APP` variable to `main.py` (on Unix, it is `export FLASK_APP=main.py`) and run it with `flask run`. 
