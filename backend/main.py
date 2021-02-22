@@ -26,8 +26,7 @@ def get():
     print(input_text)
     print(length)
     print(temp) 
-
-    # return services.generate_lyrics("model_15_base", 0.9, 1000, '[Intro]')
+    
     text = services.generate_lyrics(model_name, float(temp), int(length), input_text)
     print(repr(text))
     return text
