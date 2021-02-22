@@ -3,6 +3,8 @@ import json
 from bs4 import BeautifulSoup as BS
 import re
 import time
+import os
+from dotenv mport load_dotenv
 
 def scrape_from_artist(artist_id, file_name='lyrics.txt'):
     initial_time = time.time()
@@ -29,10 +31,6 @@ def scrape_from_artist(artist_id, file_name='lyrics.txt'):
             break
         print(new_num)
         page_num += 1
-    # print(song_paths)
-
-    # for path in song_paths:
-    #     scrape_from_song_path(path, file_name)
 
     num_songs = len(song_paths)
     for i, path in enumerate(song_paths):
@@ -55,12 +53,8 @@ def scrape_from_song_path(song_path, file_name):
     results_reg = soup.find_all('div', class_=reg)
     results = soup.find_all('div', class_='lyrics')
 
-    # print(results_reg)
-    # print(results)
 
     file = open(file_name, 'a', encoding='utf-8')
-    # print(repr(results_reg))
-    # print(repr(results))
     for result in results_reg:
         print("container")
         for br in result.find_all('br'):
@@ -80,9 +74,10 @@ def scrape_from_song_path(song_path, file_name):
     file.write('\n')
     file.close()
 
-client_id = "omA-SiO8cgdsN213wKZHtEX68I616aDwCuLxHtc19iVk5_S2CVzQhRGcJDLcn8bD"
-client_secret = '_alNIfugH4WGqjgmtnNVlarITon53UYbxTLRYX0Lf3_Yglr-FkEyTmHxVi7QDDXiCYlaR451pNaXXt0KcwBaNg'
-client_token = 'yzewkvDtjcS5FvLvrfUopskWKQk-miBMSZklLIs6cYbVLeIN03IShcX6bVb8cEeW'
+load_dotenv()
+client_id = os.getenv("CLIENTID")
+client_secret = os.getenv("CLIENTSECRET")
+client_token = os.getenv("CLIENTOKEN")
 
 token = 'Bearer {}'.format(client_token)
 headers = {'Authorization' : token}
