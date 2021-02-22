@@ -24,7 +24,6 @@ const App = () => {
   const handleAddrTypeChange = (e) => {
     setAddr(e.target.value)
     console.log(e.target.value)
-    // console.log((addrtype[e.target.value]))
   }
 
 
@@ -77,7 +76,7 @@ const App = () => {
         {outputText}
       </div>
       <br/>
-      <bn/>
+      <br/>
       <div>
         Time taken: {timeUsed}
       </div>
