@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as BS
 import re
 import time
 import os
-from dotenv mport load_dotenv
+from dotenv import load_dotenv
 
 def scrape_from_artist(artist_id, file_name='lyrics.txt'):
     initial_time = time.time()
